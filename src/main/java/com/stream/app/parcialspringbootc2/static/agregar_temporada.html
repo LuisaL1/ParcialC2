@@ -156,7 +156,7 @@
 </form>
 
 <div class="season-list" id="seasonList">
-    <!-- Las temporadas se agregarán aquí -->
+
 </div>
 
 <script>
@@ -186,11 +186,11 @@
         const seasonName = document.getElementById('seasonName').value;
         const year = new Date().getFullYear(); // Año actual como ejemplo
         if (chapters.length > 0) {
-            // Agregar la lógica para guardar la nueva temporada y los capítulos en el arreglo de episodios
+
             const newSeason = {
                 name: seasonName,
                 year: year,
-                photo: '/static/friends.jpg', // Cambiar la ruta de la imagen según sea necesario
+                photo: '/static/friends.jpg',
                 chapters: chapters
             };
 
@@ -200,7 +200,7 @@
             // Limpiar el formulario
             document.getElementById('seasonForm').reset();
             document.getElementById('chapters').innerHTML = '';
-            chapters.length = 0; // Limpiar el arreglo de capítulos
+            chapters.length = 0;
         } else {
             alert('Por favor, agrega al menos un capítulo.');
         }

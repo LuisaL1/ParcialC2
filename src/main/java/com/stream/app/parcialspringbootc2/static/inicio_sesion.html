@@ -78,16 +78,14 @@
 
 <script>
     function handleLogin(event) {
-        event.preventDefault(); // Evita el envío del formulario
+        event.preventDefault();
 
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         const errorMessage = document.getElementById('errorMessage');
 
-        // Simulación de validación (puedes personalizar esto)
         if (username === "usuario" && password === "contraseña") {
             alert("¡Inicio de sesión exitoso!");
-            // Redirige a otra página o realiza otra acción aquí
         } else {
             errorMessage.textContent = "Usuario o contraseña incorrectos.";
         }
