@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calificar - Friends</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #141414;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #ffffff;
+      text-align: center;
+      margin: 20px 0;
+      font-size: 3em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    #poster {
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+
+    .stars {
+      margin-top: 20px;
+    }
+
+    .star {
+      font-size: 2em;
+      cursor: pointer;
+      color: #e50914;
+      transition: transform 0.3s ease;
+    }
+
+    .star:hover {
+      transform: scale(1.2);
+    }
+
+    .rating {
+      font-size: 1.5em;
+      margin-top: 10px;
+    }
+
+    .button {
+      background-color: #e50914;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 12px 24px;
+      margin: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 1em;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .button:hover {
+      background-color: #b00712;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      #poster {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<h1>Calificar FRIENDS</h1>
+<img src="/static/friends.jpg" id="poster" alt="Friends TV Show Poster">
+
+<div class="stars">
+  <span class="star" data-value="1">★</span>
+  <span class="star" data-value="2">★</span>
+  <span class="star" data-value="3">★</span>
+  <span class="star" data-value="4">★</span>
+  <span class="star" data-value="5">★</span>
+</div>
+
+<div class="rating" id="rating">Calificación: 0</div>
+
+<button class="button" onclick="submitRating()">Enviar Calificación</button>
+
+<script>
+  const stars = document.querySelectorAll('.star');
+  const ratingDisplay = document.getElementById('rating');
+  let ratingValue = 0;
+
+  stars.forEach(star => {
+    star.addEventListener('click', function() {
+      ratingValue = this.getAttribute('data-value');
+      ratingDisplay.textContent = `Calificación: ${ratingValue}`;
+      updateStarDisplay();
+    });
+  });
+
+  function updateStarDisplay() {
+    stars.forEach(star => {
+      star.style.opacity = star.getAttribute('data-value') <= ratingValue ? '1' : '0.5';
+    });
+  }
+
+  function submitRating() {
+    if (ratingValue > 0) {
+      alert(`Has calificado la serie con ${ratingValue} estrellas.`);
+      // Aquí puedes agregar lógica para enviar la calificación a tu servidor
+    } else {
+      alert('Por favor, selecciona una calificación antes de enviar.');
+    }
+  }
+</script>
+</body>
+</html>

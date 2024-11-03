@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Friends</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos como antes... */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #141414;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 3em;
+        }
+        #poster {
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 24px;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-size: 1em;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button:hover {
+            background-color: #b00712;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<h1>Admin - Agregar Contenido</h1>
+<img src="/static/friends.jpg" id="poster">
+
+<div>
+    <a href="agregar_capitulo.html" class="button">Agregar Capítulos</a>
+    <a href="agregar_temporada.html" class="button">Agregar Temporadas</a>
+</div>
+</body>
+</html>

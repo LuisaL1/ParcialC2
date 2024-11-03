@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Nueva Temporada</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #212529;
+            margin: 0;
+            padding: 20px;
+            color: #fff;
+        }
+
+        h1 {
+            color: #e50914;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #343a40;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        .form-field {
+            margin-bottom: 15px;
+        }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-field input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #495057;
+            color: #fff;
+        }
+
+        .form-field input:focus {
+            border-color: #e50914;
+            background-color: #6c757d;
+        }
+
+        .button {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #b00712;
+            transform: scale(1.05);
+        }
+
+        #chapters {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: #e50914;
+            color: white;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+
+        .season-list {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .season-item {
+            background: #343a40;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+            text-align: left;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .season-item img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .season-item h4 {
+            margin: 10px 0 5px;
+            color: #e50914;
+        }
+
+        .season-item p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            form {
+                width: 90%;
+            }
+
+            .season-item {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Agregar Nueva Temporada</h1>
+
+<form id="seasonForm">
+    <div class="form-field">
+        <label for="seasonName">Nombre de la Temporada:</label>
+        <input type="text" id="seasonName" required>
+    </div>
+    <div class="form-field">
+        <label for="chapterName">Nombre del Capítulo:</label>
+        <input type="text" id="chapterName" required>
+        <button type="button" class="button add-chapter-button" onclick="addChapter()">Agregar Más Capítulos</button>
+    </div>
+    <div id="chapters"></div>
+    <button type="submit" class="button">Guardar Temporada</button>
+</form>
+
+<div class="season-list" id="seasonList">
+    <!-- Las temporadas se agregarán aquí -->
+</div>
+
+<script>
+    const chapters = [];
+    const seasons = [];
+
+    function addChapter() {
+        const chapterName = document.getElementById('chapterName').value;
+        if (chapterName) {
+            chapters.push(chapterName);
+            document.getElementById('chapterName').value = ''; // Limpiar el campo
+            displayChapters();
+        } else {
+            alert('Por favor, ingresa un nombre de capítulo.');
+        }
+    }
+
+    function displayChapters() {
+        const chaptersDiv = document.getElementById('chapters');
+        chaptersDiv.innerHTML = '<h3>Capítulos Agregados:</h3><ul>' +
+            chapters.map(chapter => `<li>${chapter}</li>`).join('') +
+            '</ul>';
+    }
+
+    document.getElementById('seasonForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const seasonName = document.getElementById('seasonName').value;
+        const year = new Date().getFullYear(); // Año actual como ejemplo
+        if (chapters.length > 0) {
+            // Agregar la lógica para guardar la nueva temporada y los capítulos en el arreglo de episodios
+            const newSeason = {
+                name: seasonName,
+                year: year,
+                photo: '/static/friends.jpg', // Cambiar la ruta de la imagen según sea necesario
+                chapters: chapters
+            };
+
+            seasons.push(newSeason);
+            displaySeasons();
+            alert(`Temporada: ${seasonName}\nCapítulos: ${chapters.join(', ')}`);
+            // Limpiar el formulario
+            document.getElementById('seasonForm').reset();
+            document.getElementById('chapters').innerHTML = '';
+            chapters.length = 0; // Limpiar el arreglo de capítulos
+        } else {
+            alert('Por favor, agrega al menos un capítulo.');
+        }
+    });
+
+    function displaySeasons() {
+        const seasonListDiv = document.getElementById('seasonList');
+        seasonListDiv.innerHTML = seasons.map(season => `
+            <div class="season-item">
+                <img src="${season.photo}" alt="${season.name}">
+                <h4>${season.name}</h4>
+                <p>Año de Emisión: ${season.year}</p>
+                <p>Capítulos: ${season.chapters.length}</p>
+            </div>
+        `).join('');
+    }
+</script>
+</body>
+</html>
+
+

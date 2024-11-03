@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporadas de Friends</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #141414;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #e50914;
+            margin: 20px 0;
+        }
+
+        .season {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .season img {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+        }
+
+        .season h2 {
+            color: #ffffff;
+            margin: 10px 0;
+        }
+
+        .season p {
+            color: #ffffff;
+        }
+
+        .back-button {
+            margin: 20px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 24px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Temporadas de FRIENDS</h1>
+
+<div id="seasons"></div>
+
+<a href="index.html" class="back-button">Volver a Inicio</a>
+
+<script>
+    async function fetchSeasons() {
+        try {
+            const response = await fetch('http://localhost:8080/api/v1/seasons/all');
+            if (!response.ok) throw new Error(`Error: ${response.status}`);
+            const seasons = await response.json();
+            displaySeasons(seasons);
+        } catch (error) {
+            console.error('Error al obtener temporadas:', error);
+            document.getElementById('seasons').innerHTML = `<p style="color: red;">Error al cargar temporadas: ${error.message}</p>`;
+        }
+    }
+
+    function displaySeasons(seasons) {
+        let htmlContent = '';
+
+        seasons.forEach(season => {
+            htmlContent += `
+                <div class="season">
+                    <img src="${season.imageUrl || 'default.jpg'}" alt="${season.title}">
+                    <h2>${season.title}</h2>
+                    <p>Fecha de Emisión: ${season.airDate}</p>
+                </div>
+            `;
+        });
+
+        document.getElementById('seasons').innerHTML = htmlContent;
+    }
+
+    // Cargar las temporadas al cargar la página
+    window.onload = fetchSeasons;
+</script>
+</body>
+</html>
+
