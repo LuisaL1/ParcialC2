@@ -146,7 +146,6 @@
             color: #ffffff;
         }
 
-        /* Estilo para los botones de inicio de sesión y admin */
         .header-buttons {
             position: absolute;
             top: 20px;
@@ -154,6 +153,23 @@
             display: flex;
             gap: 10px;
         }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
     </style>
 </head>
 <body>
@@ -171,7 +187,7 @@
         <li><strong>Número de Temporadas:</strong> 10</li>
         <li><strong>Promedio de Puntuación:</strong> 8.9/10</li>
         <li><strong>Capítulo Mejor Calificado:</strong> "The One Where Everybody Finds Out"</li>
-        <li><strong>Clasificación:</strong> PG-13</li> <!-- Sección de clasificación añadida -->
+        <li><strong>Clasificación:</strong> PG-13</li>
         <li>
             <strong>Descripción:</strong>
             <p class="description">FRIENDS es una comedia de situación que sigue a un grupo de amigos en Nueva York mientras navegan por los altibajos de la vida, el amor y la amistad.</p>
@@ -236,6 +252,22 @@
         document.getElementById('output').innerHTML = htmlContent;
     }
 </script>
+
+<footer>
+    <p>Maria Luisa Londoño Moncada</p>
+    <p>Fecha de creación: <span id="fecha-creacion"></span></p>
+    <p>Parcial práctico haciendo uso del Spring Boot y API REST</p>
+</footer>
+
+<script>
+    // Establecer la fecha de creación en el pie de página
+    document.getElementById('fecha-creacion').textContent = new Date().toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+</script>
+
 </body>
 </html>
 
